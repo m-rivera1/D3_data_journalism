@@ -71,6 +71,22 @@ d3.csv('/assets/data/data.csv').then(function(demoData) {
     .attr("fill", "purple")
     .attr("opacity", ".5");
 
+////trying to add text labels to circles
+    // var circleLabels = chartGroup.selectAll('text')
+    //   g.append('text')
+    //   .text()
+
+
+    // .data(demoData)
+    // .enter()
+    // .append('text')
+    // .text((data) => d)
+    // .attr("x", (d,i) => d.poverty)
+    // .attr("x", (d,i) => d.healthcare)
+    // .attr("r", 5);
+
+
+
     // Step 6: Initialize tool tip
     // ==============================
     var toolTip = d3.tip()
@@ -89,10 +105,25 @@ d3.csv('/assets/data/data.csv').then(function(demoData) {
     circlesGroup.on("click", function(data) {
       toolTip.show(data, this);
     })
-      // onmouseout event
-      .on("mouseout", function(data, index) {
-        toolTip.hide(data);
-      });
+  
+        // Event listeners with transitions
+  circlesGroup.on("mouseover", function() {
+    d3.select(this)
+      .transition()
+      .duration(1000)
+      .attr("r", 20) // Enlarges circle due to mouse hover
+      .attr("fill", "lightpurple");
+  })
+.on("mouseout", function() {
+  d3.select(this)
+    .transition()
+    .duration(1000)
+    .attr("r", 10) // Shrinkage due to mouse departure
+    .attr("fill", "red");
+});
+
+
+      
 
     // Create axes labels
     chartGroup.append("text")
@@ -109,4 +140,7 @@ d3.csv('/assets/data/data.csv').then(function(demoData) {
       .text("In Poverty (%)");
   }).catch(function(error) {
     console.log(error);
+
   });
+
+
