@@ -4,6 +4,7 @@
   text-anchor: middle;
 }
 
+
 .active {
   font-weight: bold;
   fill: #000;
@@ -44,6 +45,7 @@
 .d3-tip {
   padding: 6px;
   font-size: 12px;
+  display: block;
   line-height: 1;
   line-height: 1.5em;
   color: #fff;

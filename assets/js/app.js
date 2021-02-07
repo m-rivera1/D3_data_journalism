@@ -1,5 +1,18 @@
 // @TODO: YOUR CODE HERE!
 
+// The code for the chart is wrapped inside a function
+// that automatically resizes the chart
+function makeResponsive() {
+
+  // if the SVG area isn't empty when the browser loads, remove it
+  // and replace it with a resized version of the chart
+  var svgArea = d3.select("body").select("svg");
+  if (!svgArea.empty()) {
+    svgArea.remove();
+  }
+
+
+
 var svgWidth = 960;
 var svgHeight = 500;
 
@@ -69,7 +82,21 @@ d3.csv('/assets/data/data.csv').then(function(demoData) {
     .attr("cy", d => yLinearScale(d.healthcare))
     .attr("r", "15")
     .attr("fill", "purple")
-    .attr("opacity", ".5");
+    .attr("opacity", ".5")
+
+    //add state abbr's to all circles
+    var circlesGroup = chartGroup.selectAll("circle")
+    .data(demoData)
+    .enter()
+    .append('text')
+    .attr("x", d => xLinearScale(d.poverty))
+    .attr("y", d => yLinearScale(d.healthcare))
+    .style("text-anchor", "middle")
+    .style("font-size", "10px")
+    .style("fill", "white")
+    .text(d => (data.abbr));
+
+
 
 ////trying to add text labels to circles
     // var circleLabels = chartGroup.selectAll('text')
@@ -89,12 +116,17 @@ d3.csv('/assets/data/data.csv').then(function(demoData) {
 
     // Step 6: Initialize tool tip
     // ==============================
-    var toolTip = d3.tip()
+    var toolTip = d3.tip()    
       .attr("class", "tooltip")
       .offset([80, -60])
+      
       .html(function(d) {
-        return (`${d.state}<br>In Poverty (%): ${d.poverty}<br>Lacks Healthcare (%): ${d.healthcare}`);
-      });
+        return (`${d.state}<br>In Poverty: ${d.poverty}%<br>Lacks Healthcare: ${d.healthcare}%`)
+
+      })
+
+    
+      
 
     // Step 7: Create tooltip in the chart
     // ==============================
@@ -103,26 +135,34 @@ d3.csv('/assets/data/data.csv').then(function(demoData) {
     // Step 8: Create event listeners to display and hide the tooltip
     // ==============================
     circlesGroup.on("click", function(data) {
-      toolTip.show(data, this);
+      toolTip.show(data, this)
+      toolTip.style("display", "block")
+      
     })
   
         // Event listeners with transitions
   circlesGroup.on("mouseover", function() {
     d3.select(this)
-      .transition()
-      .duration(1000)
-      .attr("r", 20) // Enlarges circle due to mouse hover
-      .attr("fill", "lightpurple");
+      // .transition()
+      // .duration(1000)
+      // .attr("r", 20) // Enlarges circle due to mouse hover
+      // .attr("fill", "lightpurple")
+      //.style("display", "block");
+      
   })
-.on("mouseout", function() {
-  d3.select(this)
-    .transition()
-    .duration(1000)
-    .attr("r", 10) // Shrinkage due to mouse departure
-    .attr("fill", "red");
-});
+    .on("mouseout", function() {
+      
+      d3.select(this)
+        .transition()
+        .duration(1000)
+        .attr("r", 15) // Shrinkage due to mouse departure
+        .attr("fill", "purple");
+      
 
 
+      
+      })
+ 
       
 
     // Create axes labels
@@ -142,5 +182,10 @@ d3.csv('/assets/data/data.csv').then(function(demoData) {
     console.log(error);
 
   });
+// When the browser loads, makeResponsive() is called.
+makeResponsive();
 
+// When the browser window is resized, responsify() is called.
+d3.select(window).on("resize", makeResponsive);
+}
 
