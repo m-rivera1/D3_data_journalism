@@ -1,18 +1,5 @@
 // @TODO: YOUR CODE HERE!
 
-// The code for the chart is wrapped inside a function
-// that automatically resizes the chart
-// function makeResponsive() {
-
-//   // if the SVG area isn't empty when the browser loads, remove it
-//   // and replace it with a resized version of the chart
-//   var svgArea = d3.select("body").select("svg");
-//   if (!svgArea.empty()) {
-//     svgArea.remove();
-//   }
-
-
-
 var svgWidth = 960;
 var svgHeight = 500;
 
@@ -83,6 +70,8 @@ d3.csv('/assets/data/data.csv').then(function(demoData) {
     .attr("cx", d => xLinearScale(d.poverty))
     .attr("cy", d => yLinearScale(d.healthcare))
     .attr("r", "15")
+    .style("stroke-width", 2)
+    .style("stroke", "black")
     .attr("fill", "purple")
     .attr("opacity", ".85")
 
@@ -95,7 +84,8 @@ d3.csv('/assets/data/data.csv').then(function(demoData) {
     .attr("x", d => xLinearScale(d.poverty))
     .attr("y", d => yLinearScale(d.healthcare))
     .style("text-anchor", "middle")
-    .style("font-size", "15px")
+    .style("font-size", "12px")
+    .style("font", "Verdana, Geneva, Tahoma, sans-serif")
     .style("fill", "white")
     .text(d => (d.abbr))
     //console.log(d.abbr);
@@ -108,35 +98,15 @@ d3.csv('/assets/data/data.csv').then(function(demoData) {
       .offset([80, -60])
       .style("display", "block")
       .html(function(d) {
-        return (`${d.state}<br>In Poverty: ${d.poverty}%<br>Lacks Healthcare: ${d.healthcare}%`);
+        return (`${d.state}<hr>In Poverty: ${d.poverty}%<br>Lacks Healthcare: ${d.healthcare}%<br>`);
 
       });
 
-    
-      
-
+       
     // Step 7: Create tooltip in the chart
     // ==============================
     chartGroup.call(toolTip);
 
-
-    // var w = 1000,
-    // h = 500,
-    // r = 10,
-    // //linex, liney,
-    // x = d3.scaleLinear().domain([0, data.length - 1]).range([r, w - r]),
-    // y = d3.scaleLinear().domain([0, d3.max(data)]).range([h,  0])
-
-    // chartGroup.selectAll('chart')
-    //   .data(demoData)
-    //   .enter()
-    //   .append('chart')
-    //   .attr('width', function() { return x.rangeBand() })
-    //   .attr('height', function(d) { return - y(d) }) 
-    //   .attr('y', function(d) { return y(d) })
-    //   .attr('x', function(d, i) { return x(i) })
-    //   .on('mouseover', tip.show)
-    //   .on('mouseout', tip.hide)
 
     // Step 8: Create event listeners to display and hide the tooltip
     // ==============================
@@ -147,33 +117,22 @@ d3.csv('/assets/data/data.csv').then(function(demoData) {
       // hide tooltip when mouse leaves circle
       .on("mouseout", function(data, index) {
           toolTip.hide(data);
+          // d3.select(this)
+          // .transition()
+          // .duration(1000)
+          // .attr("r", 15) // Shrinkage due to mouse departure
+          // .attr("fill", "purple");
         });
   
         // Event listeners with transitions
-  // circlesGroup.on("mouseover", function() {
-  //   d3.select(this)
-      // .transition()
-      // .duration(1000)
-      // .attr("r", 20) // Enlarges circle due to mouse hover
-      // .attr("fill", "lightpurple")
-      //.style("display", "block");
-      
+    // circlesGroup.on("mouseover", function() {
+    //   d3.select(this)
+    //     .transition()
+    //     .duration(1000)
+    //     .attr("r", 20) // Enlarges circle due to mouse hover
+    //     .attr("fill", "lightpurple");
  
-
-  // circlesGroup.on("click", function(data) {
-
-  //   .on("mouseout", function() {
-      
-  //     d3.select(this)
-  //       .transition()
-  //       .duration(1000)
-  //       .attr("r", 15) // Shrinkage due to mouse departure
-  //       .attr("fill", "purple");
-   
-     
-  
- 
-      
+             
 
     // Create axes labels    (***update font, bold, or size for these)
     chartGroup.append("text")
@@ -192,9 +151,4 @@ d3.csv('/assets/data/data.csv').then(function(demoData) {
     console.log(error);
 
   });
-// When the browser loads, makeResponsive() is called.
-// makeResponsive();
 
-// // When the browser window is resized, responsify() is called.
-// d3.select(window).on("resize", makeResponsive);
-// }
