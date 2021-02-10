@@ -7,6 +7,7 @@ function makeResponsive() {
   }
 
 }
+  // setup variables for the chart "canvas" dimensions
   var svgWidth = 960;
   var svgHeight = 500;
 
@@ -52,7 +53,7 @@ function makeResponsive() {
 
       var yLinearScale = d3.scaleLinear()
         .domain([2, d3.max(demoData, d => d.healthcare)])
-        .range([height, 26]);
+        .range([height, 0]);
 
       // Step 3: Create axis functions
       // ==============================
@@ -91,8 +92,8 @@ function makeResponsive() {
       .attr("x", d => xLinearScale(d.poverty))
       .attr("y", d => yLinearScale(d.healthcare))
       .style("text-anchor", "middle")
-      .style("font-size", "12px")
-      // .style("font", "")
+      .style("font-size", "14px")
+      .style("font-type", "sans-serif")
       .style("fill", "white")
       .text(d => (d.abbr))
       //console.log(d.abbr);

@@ -1,0 +1,38 @@
+.tooltip {
+    position:relative; 
+    width: 180px;
+    height: 60px;
+    padding: 6px;
+    padding-top: 2px;
+    font: 11px sans-serif;
+    color: white;
+    text-align: center;
+    background: #5f4785;
+    border: 0;
+    border-radius: 10px;
+  }
+  
+  .axisText {
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-weight:bolder;
+    fill: #080808;
+    font-size: larger;
+    text-anchor: middle;
+  }
+  
+  .stateText {
+    font-family: sans-serif;
+    font-size: 0.8rem;
+    fill: #fff;
+    text-anchor: middle;
+  }
+
+  /* mixed media considerations */
+@media screen and (max-width: 530px) {
+  .stateText { display: none; }
+  .aText { font-size: 14px; }
+}
+
+@media screen and (max-width: 400px) {
+  .aText { font-size: 13px; }
+}
