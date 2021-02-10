@@ -7,7 +7,8 @@ function makeResponsive() {
   }
 
 }
-  // setup variables for the chart "canvas" dimensions
+  // setup variables for the chart "canvas" dimensions.  
+  // Much of this code for the inital setup of the chart dimensions is one of the week 16 class activities 
   var svgWidth = 960;
   var svgHeight = 500;
 
@@ -126,24 +127,10 @@ function makeResponsive() {
         // hide tooltip when mouse leaves circle
         .on("mouseout", function(data, index) {
             toolTip.hide(data);
-            // d3.select(this)
-            // .transition()
-            // .duration(1000)
-            // .attr("r", 15) // Shrinkage due to mouse departure
-            // .attr("fill", "purple");
-          });
-    
-          // Event listeners with transitions
-      // circlesGroup.on("mouseover", function() {
-      //   d3.select(this)
-      //     .transition()
-      //     .duration(1000)
-      //     .attr("r", 20) // Enlarges circle due to mouse hover
-      //     .attr("fill", "lightpurple");
-  
-              
+         
+          });         
 
-      // Create axes labels    (***update font, bold, or size for these)
+      // Create axes labels    
       chartGroup.append("text")
         .attr("transform", "rotate(-90)")
         .attr("y", 0 - margin.left + 40)
