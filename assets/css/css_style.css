@@ -1,4 +1,4 @@
-  .tooltip { 
+.tooltip {
     position:relative; 
     width: 180px;
     height: 60px;
@@ -10,7 +10,16 @@
     background: #5f4785;
     border: 0;
     border-radius: 10px;
-  } 
+  }
+  
+  .axisText {
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-weight:bolder;
+    fill: #080808;
+    font-size: larger;
+    text-anchor: middle;
+  }
+
 
   /* mixed media considerations */
 @media screen and (max-width: 530px) {
