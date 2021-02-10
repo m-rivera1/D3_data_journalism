@@ -1,12 +1,5 @@
 // @TODO: YOUR CODE HERE!
-function makeResponsive() {
-  var svgArea = d3.select("body").select("svg");
 
-  if(!svgArea.empty()) {
-    svgArea.remove();
-  }
-
-}
   // setup variables for the chart "canvas" dimensions.  
   // Much of this code for the inital setup of the chart dimensions is one of the week 16 class activities 
   var svgWidth = 960;
@@ -31,7 +24,7 @@ function makeResponsive() {
   var chartGroup = svg.append("g")
     .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
-  d3.select("body").append("div").attr("class", "tooltip").style("opacity", 0);
+  //d3.select("body").append("div").attr("class", "tooltip").style("opacity", 0);
 
   // Import Data
   d3.csv('/assets/data/data.csv').then(function(demoData) {
@@ -147,12 +140,7 @@ function makeResponsive() {
       console.log(error);
 
     
-  
-  // When the browser loads, makeResponsive() is called.
-makeResponsive();
 
-// When the browser window is resized, makeResponsive() is called.
-d3.select(window).on("resize", makeResponsive);
 });
 
 
